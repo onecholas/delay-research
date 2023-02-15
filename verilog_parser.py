@@ -1,5 +1,12 @@
 import re
 
+class verilog_object:
+    
+    def __init__(self, module_name, input_vec, output_vec):
+        self.module = module_name
+        self.inputs = input_vec
+        self.outputs = output_vec
+
 def parse_verilog(verilog_file):
 
     with open(verilog_file, "r") as file:
@@ -21,14 +28,22 @@ def parse_verilog(verilog_file):
         # Find the output ports
         output_matches = output_pattern.findall(verilog_text) # Check for all matches
 
-        print(f"Module: {module_name}")
-        print(f"Inputs: {input_matches}")
-        print(f"Outputs: {output_matches}")
+        # print(f"Module: {module_name}")
+        # print(f"Inputs: {input_matches}")
+        # print(f"Outputs: {output_matches}")
+
+        return verilog_object(module_name, input_matches, output_matches)
 
     else:
-        print("No module found in Verilog text.")
+        # print("No module found in Verilog text.")
+
+        return None
+        
 
 
 if __name__ == "__main__":
     # Parse the Verilog module
-    parse_verilog("example_file.v")
+    object = parse_verilog("example_file.v")
+    print(f"Module: {object.module}")
+    print(f"Inputs: {object.inputs}")
+    print(f"Outputs: {object.outputs}")
