@@ -5,7 +5,7 @@ class input_pair:
         self.first = first
         self.second = second
 
-def csv_parser(input_pairs):
+def parse_csv(input_pairs):
 
     # create an empty list to store the pairs
     all_pairs = []
@@ -27,11 +27,13 @@ def csv_parser(input_pairs):
                     second_pairs.update({input_names[column]: row[column]})
             all_pairs.append(input_pair(first_pairs,second_pairs))
 
-    # print the pairs
-    for i in range(len(all_pairs)):
-        print(f"#{i+1} First Pair: {all_pairs[i].first}")
-        print(f"#{i+1} Second Pair: {all_pairs[i].second}")
+    # # print the pairs
+    # for i in range(len(all_pairs)):
+    #     print(f"#{i+1} First Pair: {all_pairs[i].first}")
+    #     print(f"#{i+1} Second Pair: {all_pairs[i].second}")
+
+    return all_pairs
 
 if __name__ == "__main__":
     # Parse the Verilog module
-    object = csv_parser("example_inputs.csv")
+    object = parse_csv("example_inputs.csv")
