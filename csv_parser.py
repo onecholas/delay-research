@@ -1,12 +1,11 @@
 import csv
 
-class input:
-
+class input_pair:
     def __init__(self, first, second):
         self.first = first
         self.second = second
 
-def delay(design, input_pairs):
+def csv_parser(input_pairs):
 
     # create an empty list to store the pairs
     all_pairs = []
@@ -18,15 +17,21 @@ def delay(design, input_pairs):
 
         # iterate over all input pairs
         for row in reader:
-            pairs = dict()
+            first_pairs = dict()
+            second_pairs = dict()
             # place dictionary with input name as key into all_pairs vector
             for column in range(len(input_names)):
-                pairs.update({input_names[column]: row[column]})
-            all_pairs.append(pairs)
+                if column + 1 <= len(input_names)/2:
+                    first_pairs.update({input_names[column]: row[column]})
+                else:
+                    second_pairs.update({input_names[column]: row[column]})
+            all_pairs.append(input_pair(first_pairs,second_pairs))
 
     # print the pairs
-    print(all_pairs)
+    for i in range(len(all_pairs)):
+        print(f"#{i+1} First Pair: {all_pairs[i].first}")
+        print(f"#{i+1} Second Pair: {all_pairs[i].second}")
 
 if __name__ == "__main__":
     # Parse the Verilog module
-    object = delay(None,"example_inputs.csv")
+    object = csv_parser("example_inputs.csv")

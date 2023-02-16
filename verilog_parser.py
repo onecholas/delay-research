@@ -38,12 +38,10 @@ def parse_verilog(verilog_file):
         # print("No module found in Verilog text.")
 
         return None
-        
-
 
 if __name__ == "__main__":
     # Parse the Verilog module
-    object = parse_verilog("example_file.v")
+    object = parse_verilog("example_module.v")
     print(f"Module: {object.module}")
     print(f"Inputs: {object.inputs}")
     print(f"Outputs: {object.outputs}")
