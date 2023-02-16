@@ -1,5 +1,5 @@
-from csv_parser import parse_csv, input_pair
-from verilog_parser import parse_verilog, verilog_object
+from input_pair_parser import parse_csv, input_pair
+from input_module_parser import parse_verilog, verilog_object
 
 # Function to generate Verilog testbench
 def generate_verilog_testbench(verilog_module, test_inputs, test_outputs):
@@ -81,21 +81,21 @@ if __name__ == "__main__":
 
     if examples == 1:
         print("Input the verilog module (.v) file name.")
-        verilog_module_file = input() # "example_module.v"
+        verilog_module_file = input() # "test/example_module.v"
         print("Input the input pairs (.csv) file name.")
-        input_pairs_file = input() # "example_inputs.csv"
+        input_pairs_file = input() # "test/example_inputs.csv"
         print("Input the output (.csv) file name.")
-        output_delay = input() # "example_outputs.csv"
+        output_delay = input() # "test/example_outputs.csv"
         print("Input the verilog testbench (.v) file name.") 
-        output_file = input() # "example_testbench.v"
+        output_file = input() # "test/example_testbench.v"
 
         testbench = generate_verilog_testbench(verilog_module_file, input_pairs_file, output_delay)
         with open(output_file, "w") as f:
             f.write(testbench)
         print(f"Stored at {output_file}")
-        
+
     else:
-        testbench = generate_verilog_testbench("example_module.v", "example_inputs.csv", "example_outputs.csv")
-        with open("example_testbench.v", "w") as f:
+        testbench = generate_verilog_testbench("test/example_module.v", "test/example_inputs.csv", "test/example_outputs.csv")
+        with open("test/example_testbench.v", "w") as f:
             f.write(testbench)
-        print(f"Stored at example_testbench.v")
+        print(f"Stored at test/example_testbench.v")
