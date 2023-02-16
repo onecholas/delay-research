@@ -67,13 +67,21 @@ endmodule
 
 if __name__ == "__main__":
     # Generate and save Verilog testbench file
-    print("Input the verilog module (.v) file name.")
-    verilog_module_file = input() # "example_module.v"
-    print("Input the input pairs (.csv) file name.")
-    input_pairs_file = input() # "example_inputs.csv"
-    print("Input the verilog testbench file name (.v)") 
-    output_file = input() # "example_testbench.v"
-    testbench = generate_verilog_testbench(verilog_module_file, input_pairs_file)
-    with open(output_file, "w") as f:
-        f.write(testbench)
-    print(f"Stored at {output_file}")
+    print("Type 1 to enter manually or 0 to use examples.")
+    examples = input()
+    if examples == 1:
+        print("Input the verilog module (.v) file name.")
+        verilog_module_file = input() # "example_module.v"
+        print("Input the input pairs (.csv) file name.")
+        input_pairs_file = input() # "example_inputs.csv"
+        print("Input the verilog testbench file name (.v)") 
+        output_file = input() # "example_testbench.v"
+        testbench = generate_verilog_testbench(verilog_module_file, input_pairs_file)
+        with open(output_file, "w") as f:
+            f.write(testbench)
+        print(f"Stored at {output_file}")
+    else:
+        testbench = generate_verilog_testbench("example_module.v", "example_inputs.csv")
+        with open("example_testbench.v", "w") as f:
+            f.write(testbench)
+        print(f"Stored at example_testbench.v")
