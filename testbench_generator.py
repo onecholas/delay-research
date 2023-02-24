@@ -42,15 +42,15 @@ def generate_verilog_testbench(verilog_module, test_inputs, test_outputs):
 
     # CURRENTLY ADDING CSV OUTPUT
 
-    testbench += f"    $fopen(\"{test_outputs}\");\n"
-    testbench += f"    $fwrite(\"{test_outputs}\", \"Timestamp1, "
-    for output in module.outputs:
-        testbench += f"{output}1"
-    testbench += f"\");\n"
-    testbench += f"    $fwrite(\"{test_outputs}\", \"Timestamp2, "
-    for output in module.outputs:
-        testbench += f"{output}2"
-    testbench += f"\\n\");\n\n"
+    # testbench += f"    $fopen(\"{test_outputs}\");\n"
+    # testbench += f"    $fwrite(\"{test_outputs}\", \"Timestamp1, "
+    # for output in module.outputs:
+    #     testbench += f"{output}1"
+    # testbench += f"\");\n"
+    # testbench += f"    $fwrite(\"{test_outputs}\", \"Timestamp2, "
+    # for output in module.outputs:
+    #     testbench += f"{output}2"
+    # testbench += f"\\n\");\n\n"
     testbench += f"    // Apply test inputs\n\n"
 
     for i, pairs in enumerate(test_pairs):
@@ -58,17 +58,17 @@ def generate_verilog_testbench(verilog_module, test_inputs, test_outputs):
         for name, value in pairs.first.items():
             testbench += f"    {name} = {value};\n"
         for name in module.outputs:
-            #testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
-            #testbench += f"    $display(\"  output {name} = %d\", {name});\n\n"
-            testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\", $time, {name});\n"
+            testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
+            testbench += f"    $display(\"  output {name} = %d\", {name});\n\n"
+            # testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\", $time, {name});\n"
         testbench += "    #10;\n"  # Apply first inputs for 10 ns
         for name, value in pairs.second.items():
             testbench += f"    {name} = {value};\n"
         for name in module.outputs:
-            #testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
-            #testbench += f"    $display(\"  output {name} = %d\", {name});\n\n"
-            testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\\n\", $time, {name});\n\n"
-    testbench += f"    fclose(\"{test_outputs}\");\n\n"
+            testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
+            testbench += f"    $display(\"  output {name} = %d\", {name});\n\n"
+            # testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\\n\", $time, {name});\n\n"
+    #testbench += f"    fclose(\"{test_outputs}\");\n\n"
     testbench += "  end\n\n"
     testbench += "endmodule\n"
     return testbench

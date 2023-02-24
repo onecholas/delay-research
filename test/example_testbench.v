@@ -16,58 +16,67 @@ module testbench();
   );
 
   initial begin
-    $fopen("example_outputs.csv");
-    $fwrite("example_outputs.csv", "Timestamp1, c1");
-    $fwrite("example_outputs.csv", "Timestamp2, c2\n");
-
     // Apply test inputs
 
     // Test 1
     a = 1;
     b = 2;
-    $fwrite("example_outputs.csv", "%t,%d", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
+
     #10;
     a = 1;
     b = 2;
-    $fwrite("example_outputs.csv", "%t,%d\n", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
 
     // Test 2
     a = 1;
     b = 1;
-    $fwrite("example_outputs.csv", "%t,%d", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
+
     #10;
     a = 2;
     b = 3;
-    $fwrite("example_outputs.csv", "%t,%d\n", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
 
     // Test 3
     a = 3;
     b = 2;
-    $fwrite("example_outputs.csv", "%t,%d", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
+
     #10;
     a = 2;
     b = 3;
-    $fwrite("example_outputs.csv", "%t,%d\n", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
 
     // Test 4
     a = 4;
     b = 2;
-    $fwrite("example_outputs.csv", "%t,%d", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
+
     #10;
     a = 2;
     b = 4;
-    $fwrite("example_outputs.csv", "%t,%d\n", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
 
     // Test 5
     a = 5;
     b = 3;
-    $fwrite("example_outputs.csv", "%t,%d", $time, c);
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
+
     #10;
     a = 4;
     b = 1;
-    $fwrite("example_outputs.csv", "%t,%d\n", $time, c);
-
-    fclose("example_outputs.csv");
+    $display("  Current simulation time = %t", $time);
+    $display("  output c = %d", c);
 
   end
 
