@@ -30,7 +30,6 @@ def random_input_generator(verilog_module, input_pairs_file):
                         # What the random input should be
                         row = [random.randint(0, 100) for idx in range(len(inputs))]
                         writer.writerow(row)
-                        
 
 if __name__ == "__main__":
         # sparse_input_generator("test2/adder.v", "test2/adder_rand_inputs.csv")
