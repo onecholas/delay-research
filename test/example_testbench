@@ -1,0 +1,46 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x559c85302bc0 .scope module, "testbench" "testbench" 2 3;
+ .timescale -9 -9;
+v0x559c85314de0_0 .var "a[]", 0 0;
+v0x559c85314eb0_0 .var "b[]", 0 0;
+v0x559c85314f80_0 .net "c[]", 0 0, L_0x559c85315080;  1 drivers
+S_0x559c85302d50 .scope module, "dut" "example" 2 12, 3 1 0, S_0x559c85302bc0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a[]";
+    .port_info 1 /INPUT 1 "b[]";
+    .port_info 2 /OUTPUT 1 "c[]";
+L_0x559c85315080 .functor AND 1, v0x559c85314de0_0, v0x559c85314eb0_0, C4<1>, C4<1>;
+v0x559c852cbba0_0 .net "a[]", 0 0, v0x559c85314de0_0;  1 drivers
+v0x559c85314c00_0 .net "b[]", 0 0, v0x559c85314eb0_0;  1 drivers
+v0x559c85314cc0_0 .net "c[]", 0 0, L_0x559c85315080;  alias, 1 drivers
+    .scope S_0x559c85302bc0;
+T_0 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x559c85314de0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x559c85314eb0_0, 0, 1;
+    %vpi_call 2 24 "$display", "  Current simulation time = %t", $time {0 0 0};
+    %vpi_call 2 25 "$display", "  output c[] = %d", v0x559c85314f80_0 {0 0 0};
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x559c85314de0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x559c85314eb0_0, 0, 1;
+    %vpi_call 2 30 "$display", "  Current simulation time = %t", $time {0 0 0};
+    %vpi_call 2 31 "$display", "  output c[] = %d", v0x559c85314f80_0 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "example_testbench.v";
+    "example_module.v";

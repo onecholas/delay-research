@@ -51,9 +51,9 @@ def generate_verilog_testbench(verilog_module, test_inputs):
             testbench += f"  );\n\n"
         else:
             if output.startswith("\\"):
-                testbench += f"    .{output} ({output} )\n"
+                testbench += f"    .{output} ({output} ),\n"
             else:
-                testbench += f"    .{output}({output})\n"
+                testbench += f"    .{output}({output}),\n"
 
     testbench += "  initial begin\n"
 
@@ -73,17 +73,24 @@ def generate_verilog_testbench(verilog_module, test_inputs):
     for i, pairs in enumerate(test_pairs):
         testbench += f"\n    // Test {i+1}\n"
         for name, value in pairs.first.items():
+            testbench += f"  "
             testbench += f"    {name} = {value};\n"
         testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
         for name in module.outputs:
-            testbench += f"    $display(\"  output {name} = %d\", {name});\n"
+            if name.startswith("\\"):
+                testbench += f"    $display(\"  output {name} = %d\", {name} );\n"
+            else:
+                testbench += f"    $display(\"  output {name} = %d\", {name});\n"  
             # testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\", $time, {name});\n"
         testbench += "    #10;\n"  # Apply first inputs for 10 ns
         for name, value in pairs.second.items():
             testbench += f"    {name} = {value};\n"
         testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
         for name in module.outputs:
-            testbench += f"    $display(\"  output {name} = %d\", {name});\n"
+            if name.startswith("\\"):
+                testbench += f"    $display(\"  output {name} = %d\", {name} );\n"
+            else:
+                testbench += f"    $display(\"  output {name} = %d\", {name});\n"  
             # testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\\n\", $time, {name});\n\n"
     #testbench += f"    fclose(\"{test_outputs}\");\n\n"
     testbench += "  end\n\n"
