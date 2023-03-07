@@ -45,7 +45,19 @@ def random_input_generator(verilog_module, input_pairs_file):
                         row = [random.randint(0, 100) for idx in range(len(inputs))]
                         writer.writerow(row)
 
+def one_input_generator(verilog_module, input_pairs_file):
+        inputs = parse_verilog(verilog_module).inputs
+        inputs = inputs + inputs
+        default = [0 for idx in range(len(inputs))]
+
+        with open(input_pairs_file, 'w', newline='', encoding='utf-8-sig') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(inputs)
+                default[0] = 1
+                writer.writerow(default)
+
 if __name__ == "__main__":
         # sparse_input_generator("test2/adder_module.v", "test2/adder_rand_inputs.csv")
         # random_input_generator("test2/adder_module.v", "test2/adder_rand_inputs.csv")
         sparse_input_generator_probability("test2/adder_module.v", "test2/adder_rand_inputs.csv", 0.5)
+        # one_input_generator("test2/adder_module.v", "test2/adder_rand_inputs.csv")

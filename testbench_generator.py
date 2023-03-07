@@ -82,7 +82,7 @@ def generate_verilog_testbench(verilog_module, test_inputs):
             else:
                 testbench += f"    $display(\"  output {name} = %d\", {name});\n"  
             # testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\", $time, {name});\n"
-        testbench += "    #10;\n"  # Apply first inputs for 10 ns
+        # testbench += "    #1;\n"  # Apply first inputs for 10 ns
         for name, value in pairs.second.items():
             testbench += f"    {name} = {value};\n"
         testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
@@ -122,7 +122,7 @@ if __name__ == "__main__":
         #     f.write(testbench)
         # print(f"Stored at test/example_testbench.v")
 
-        testbench = generate_verilog_testbench("test2/adder.v", "test2/adder_rand_inputs.csv")
+        testbench = generate_verilog_testbench("test2/adder_module.v", "test2/adder_rand_inputs.csv")
         with open("test2/adder_testbench.v", "w") as f:
             f.write(testbench)
         print(f"Stored at test2/adder_testbench.v")
