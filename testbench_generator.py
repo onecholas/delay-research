@@ -82,7 +82,7 @@ def generate_verilog_testbench(verilog_module, test_inputs):
             else:
                 testbench += f"    $display(\"  output {name} = %d\", {name});\n"  
             # testbench += f"    $fwrite(\"{test_outputs}\", \"%t,%d\", $time, {name});\n"
-        # testbench += "    #1;\n"  # Apply first inputs for 10 ns
+        testbench += "    #1;\n"  # Apply first inputs for 10 ns
         for name, value in pairs.second.items():
             testbench += f"    {name} = {value};\n"
         testbench += f"    $display(\"  Current simulation time = %t\", $time);\n"
