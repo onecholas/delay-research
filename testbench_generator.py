@@ -10,7 +10,9 @@ def generate_verilog_testbench(verilog_module, test_inputs):
     module = parse_verilog(verilog_module)
 
     # Generate testbench file contents
-    testbench = f"`timescale 1ns/1ns\n\n"
+    testbench = f"`timescale 1ns/1ns\n"
+
+    # testbench += "`include \"adder_conv_syn.sdf\"\n\n"
     testbench += f"module testbench();\n\n"
 
     # INPUTS AND OUTPUTS
@@ -54,6 +56,30 @@ def generate_verilog_testbench(verilog_module, test_inputs):
                 testbench += f"    .{output} ({output} ),\n"
             else:
                 testbench += f"    .{output}({output}),\n"
+
+    testbench += "  initial begin\n"
+    testbench += "    $sdf_annotate(\"adder_module_syn.sdf\", dut);\n"
+    testbench += "  end\n\n"
+
+    testbench += "  always @("   #{output} ) $display(\"  Current simulation time = %t\", $time);\n"
+
+    for i, output in enumerate(module.outputs):
+        if i == len(module.outputs) - 1:
+            if output.startswith("\\"):
+                testbench += f"{output} ) $display(\"  Current simulation time = %t\", $time);\n\n"
+            else:
+                testbench += f"{output}) $display(\"  Current simulation time = %t\", $time);\n\n"
+        else:
+            if  i % 7 == 6:
+                if output.startswith("\\"):
+                    testbench += f"{output}  or \n    "
+                else:
+                    testbench += f"{output} or \n    "
+            else:
+                if output.startswith("\\"):
+                    testbench += f"{output}  or "
+                else:
+                    testbench += f"{output} or "
 
     testbench += "  initial begin\n"
 

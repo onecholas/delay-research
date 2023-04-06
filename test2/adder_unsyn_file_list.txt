@@ -1,3 +1,0 @@
-adder_module.v
-adder_testbench.v
-adder_nangate.v

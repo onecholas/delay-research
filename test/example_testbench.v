@@ -28,7 +28,7 @@ module testbench();
     \a[] = 1;
     \b[] = 2;
     $display("  Current simulation time = %t", $time);
-    $display("  output \c[] = %d", \c[] );
+    $displayx
 
   end
 

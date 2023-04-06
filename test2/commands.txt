@@ -1,0 +1,1 @@
+iverilog -gspecify -o adder_testbench -c adder_file_list_syn.txt
